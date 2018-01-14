@@ -1,0 +1,19 @@
+{
+"profile" : [
+		{
+			"id":1,
+			"name":"nook",
+			"age":21
+		},
+		{
+			"id":2,
+			"name":"nun",
+			"age":16
+		},
+		{
+			"id":3,
+			"name":"noey",
+			"age":10
+		}
+	]
+}

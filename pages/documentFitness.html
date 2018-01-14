@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>BeFit-Fitness</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- style -->
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <!-- ============= nav ========================================================================================== -->
+    <!-- ============= nav ============ -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <span>
+                    <img src="../images/username.png" width="30px" height="30px" />
+                </span>
+                <span id='getNameUser'></span>
+            </a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <div id="tab-menu"></div>
+    </nav>
+
+    <!-- ============= end nav ========================================================================================== -->
+    <div id="wrapper">
+        <div id="page-wrapper">
+            <!-- body -->
+            <div class="row" style="padding-top:1%">
+                <div class="col-md-12 text-left">
+                    <h1 id="txtNameFitness"></h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+
+            <div class="row" style="padding-top:1%">
+                <div class="col-md-8 text-left">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            ข้อมูลทั่วไป
+                        </div>
+                        <div class="panel-body">
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-12 text-center">
+                                    <svg id="barcodeFitness"></svg>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-2 text-left">
+                                    <span>ที่อยู่ :</span>
+                                </div>
+                                <div class="col-md-10 text-left">
+                                    <span id="txtAddressFitness"></span>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-2 text-left">
+                                    <span>เวลาทำการ :</span>
+                                </div>
+                                <div class="col-md-10 text-left">
+                                    <span id="txtOpenFitness"></span>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-2 text-left">
+                                    <span>ระบบจอง :</span>
+                                </div>
+                                <div class="col-md-10 text-left">
+                                    <span id="txtBookingFitness"></span>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-12 text-right">
+                                    <button id="" type="button" class="btn btn-success" onclick="">Export Barcode</button>
+                                    <button id="" type="button" class="btn btn-warning" onclick="">แก้ไข</button>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+                    </div>
+                </div>
+                <!-- PANAL body -->
+                <div class="col-md-4 text-left">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            ข้อมูลผู้ดูแลระบบ
+                        </div>
+                        <div class="panel-body">
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-12 text-center">
+                                    <img src="../images/username.png" width="150px" height="150px" />
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-4 col-md-offset-1 text-left">
+                                    <span>รหัส :</span>
+                                </div>
+                                <div class="col-md-7 text-left">
+                                    <span id="txtCodeUser"></span>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-4 col-md-offset-1 text-left">
+                                    <span>ชื่อ-นามสกุล :</span>
+                                </div>
+                                <div class="col-md-7 text-left">
+                                    <span id="txtAdminFitness"></span>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-4 col-md-offset-1 text-left">
+                                    <span>ชื่อบัญชีผู้ใช้ :</span>
+                                </div>
+                                <div class="col-md-7 text-left">
+                                    <span id="txtUsername"></span>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-4 col-md-offset-1 text-left">
+                                    <span>รหัสผ่าน :</span>
+                                </div>
+                                <div class="col-md-7 text-left">
+                                    <span id="txtPassword"></span>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+                            <div class="row" style="padding-top:3%">
+                                <div class="col-md-12 text-right">
+                                    <button id="saveEditFitness" type="button" class="btn btn-warning" onclick="">แก้ไข</button>
+                                </div>
+                                <!-- /.col-lg-12 -->
+                            </div>
+                            <!-- /.row -->
+
+                        </div>
+                        <!-- PANAL body -->
+                    </div>
+                    <!-- PANAL  -->
+                </div>
+            </div>
+            <!-- row -->
+
+
+</body>
+
+</html>
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+<!-- Page-Level Demo Scripts - Notifications - Use for reference -->
+<script>
+    // tooltip demo
+    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    })
+</script>
+
+<!-- js -->
+<script src="../js/menu.js"></script>
+<script src="../js/documentFitness.js"></script>
+
+<!-- include -->
+<script src="../js/w3.js"></script>
+
+<!-- barcode -->
+<script src="../js/JsBarcode.code128.min.js"></script>
