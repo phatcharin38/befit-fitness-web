@@ -175,7 +175,7 @@ function viewQrCode(id,page) {
                 for(j=start;j<end;j++){
                     if(j<item.amount){
                         html = html + "<tr><td class='text-center'>" + (j+1) + "</td><td class='text-center '>" +
-                        "<button type='button' class='btn btn-success ' onclick='showQrCode(\""+item.name+"\",\""+item.code_fitness+"\","+(j+1)+");' title='" + item.name + " " +(j+1)+"'><div id='div2'>" + item.name + " " +(j+1)+"</div></button>&nbsp;</td></tr>"   ;                     
+                        "<button type='button' class='btn btn-success ' onclick='showQrCode(\""+item.name+"\",\""+item.code+"\","+(j+1)+");' title='" + item.name + " " +(j+1)+"'><div id='div2'>" + item.name + " " +(j+1)+"</div></button>&nbsp;</td></tr>"   ;                     
                     }                 
                 }  
                

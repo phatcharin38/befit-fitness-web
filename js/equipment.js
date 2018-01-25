@@ -3,6 +3,7 @@ $( document ).ready(function() {
     setDataTable(1);
     setTypeEquipment();
     setAllFitness();
+
          
 });
 
@@ -11,6 +12,8 @@ function setDataTable(page){
     $('#desTypeEquipment').val("");
     $('#txtPanal').text("เพิ่มประเภทเครื่องออกกำลังกาย");
     $('#btnPanal').empty();
+    $('#preview').attr('src', '../images/add-image.png');
+    $('#imgInp').val("");
     html = '<button id="saveAddFitness" type="button" class="btn btn-success" onclick="saveAddTypeEquipment();">เพิ่ม</button>';
     $('#btnPanal').html(html);
     setDataTableTypeEquipment(page);
@@ -35,7 +38,9 @@ function setDataTableTypeEquipment(start) {
         success: function (result) {
             console.log(result);
             $.each(result, function (i, item) {
-                html = html + "<tr><td class='text-center'>" + (i + 1) + "</td><td>" + item.name + "</td>" +
+                html = html + "<tr><td class='text-center'>" + (i + 1) + "</td>"+
+                                "<td><img src='"+item.image+"' width='100px' height='100px'></td>"+
+                                "<td>" + item.name + "</td>" +
                                 "<td class='text-left'>" + item.description + "</td><td class='text-center'>" +
                                 "<button type='button' class='btn btn-warning' onclick='editTypeEquipment(" + item.id + ")'>แก้ไข</button>&nbsp;" +
                                 "<button type='button' class='btn btn-danger' onclick='deleteTypeEquipment(" + item.id + ")'>ลบ</button></td></tr>"
@@ -72,19 +77,44 @@ function setPaggingTypeEquipment(count) {
 }
 
 function saveAddTypeEquipment() {
-    var name = $('#nameTypeEquipment').val();
-    var des = $('#desTypeEquipment').val();
-    var data = JSON.stringify({name:name,des:des});
+    // var image = "";
 
-    $.ajax({
-        type: "POST",
-        url: "../service/saveAddTypeEquipment.php?data=" + data,
-        data: '',
-        success: function (result) {
-            setDataTable(1);      
+    var input = document.getElementById("imgInp");
+    var filePath = $(input).val();
+    console.log(filePath);
+
+    
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {         
+        //   console.log(e.target.result);
+
+        var name = $('#nameTypeEquipment').val();
+        var des = $('#desTypeEquipment').val();
+        // var data = JSON.stringify({name:name,des:des,image:e.target.result});
+        
+
+        $.ajax({
+            type: "POST",
+            url: "../service/saveAddTypeEquipment.php",
+            data: JSON.stringify({name:name,des:des,image:e.target.result}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                // alert(data);
+                setDataTable(1); 
+            },
+            failure: function(errMsg) {
+                alert(errMsg);
+            }
+        });
+
         }
-    });
+        reader.readAsDataURL(input.files[0]);
+      }
 }
+
 
 function deleteTypeEquipment(id) {
     $.ajax({
@@ -105,7 +135,8 @@ function editTypeEquipment(id) {
         success: function (result) {
             $.each(result, function (i, item) {
                 $('#nameTypeEquipment').val(item.name);
-                $('#desTypeEquipment').val(item.description);    
+                $('#desTypeEquipment').val(item.description); 
+                $('#preview').attr('src',item.image);    
                 $('#txtPanal').text("แก้ไขประเภทเครื่องออกกำลังกาย");
                 $('#btnPanal').empty();
                 html = '<button id="saveAddFitness" type="button" class="btn btn-warning" onclick="saveEditTypeEquipment('+id+');">บันทึก</button>';
@@ -273,7 +304,7 @@ function viewQrCode(id,page) {
                 for(j=start;j<end;j++){
                     if(j<item.amount){
                         html = html + "<tr><td class='text-center'>" + (j+1) + "</td><td class='text-center '>" +
-                        "<button type='button' class='btn btn-success ' onclick='showQrCode(\""+item.name+"\",\""+item.code_fitness+"\","+(j+1)+");' title='" + item.name + " " +(j+1)+"'><div id='div2'>" + item.name + " " +(j+1)+"</div></button>&nbsp;</td></tr>"   ;                     
+                        "<button type='button' class='btn btn-success ' onclick='showQrCode(\""+item.name+"\",\""+item.code+"\","+(j+1)+");' title='" + item.name + " " +(j+1)+"'><div id='div2'>" + item.name + " " +(j+1)+"</div></button>&nbsp;</td></tr>"   ;                     
                     }                 
                 }  
                
@@ -297,7 +328,8 @@ function clearQrcodeEquiment() {
 }
 
 function showQrCode(name,codeFitness,no){
-    var data = JSON.stringify({codeFitness:codeFitness,name:name,no:no});
+    // var data = JSON.stringify({codeFitness:codeFitness,name:name,no:no});
+    var data = "" + codeFitness + ";" + name + ";" + no;
     console.log(data);  
 
     $('#txtQrcodeEquipmentName').text(name + " " +no);
@@ -350,3 +382,24 @@ function addEquipmentFitness() {
         }
     });
 }
+
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      $('#preview').attr('src', e.target.result);
+    //   console.log(e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+  var filePath = $(this).val();
+  console.log(filePath);
+
+});
+

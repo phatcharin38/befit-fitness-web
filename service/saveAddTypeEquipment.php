@@ -1,12 +1,15 @@
 <?php
 require ("config.php");
-    $data = json_decode($_GET["data"], false);
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    $postdata = file_get_contents("php://input");
+    $request = json_decode($postdata);
     $response = 0;
-    $name = $data->name;
-    $des = $data->des;
+    $name = $request->name;
+    $des = $request->des;
+    $image = $request->image;
     
-     
-    $sql = "INSERT INTO type_equipment(name,description)VALUES('".$name."','".$des."')";
+    // $sql = "INSERT INTO type_equipment(name,description,image)VALUES('".$name."','".$des."')";
+    $sql = "INSERT INTO type_equipment(name,description,image)VALUES('".$name."','".$des."','".$image."')";
 
     $result = mysqli_query($conn,"set NAMES utf8");
     $result = mysqli_query($conn,$sql);
@@ -17,5 +20,6 @@ require ("config.php");
         $response = 2;
     }
     echo "".$response;
-	$conn->close();
+    $conn->close();
+}
 ?>

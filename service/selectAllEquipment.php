@@ -1,6 +1,6 @@
 <?php
 require ("config.php");
-    // Allow from any origin
+	// Allow from any origin
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
         header('Access-Control-Allow-Credentials: true');
@@ -19,23 +19,10 @@ require ("config.php");
         exit(0);
     }
 
-
-    $response = 0;
-    $id = $_GET['id'];
-
-    $sql = "SELECT * FROM fitness WHERE id = ".$id;
+    $codeFitness = $_GET['codeFitness'];
+    $sql = "SELECT T.*,E.* FROM type_equipment T,equipment E WHERE T.id = E.type_equipment AND E.code_fitness = ".$codeFitness." ORDER BY T.name ASC";
     $result = mysqli_query($conn,"set NAMES utf8");
     $result = mysqli_query($conn,$sql);
-   
-    // $myObj->id = $result[0]['id'];
-    // $myObj->code = $result[0]['code_fitness'];
-    // $myObj->name = $result[0]['name_fitness'];   
-    // $myObj->address = $result[0]['address_fitness'];   
-    // $myObj->open = $result[0]['open_fitness'];   
-    // $myObj->admin = $result[0]['admin_fitness'];        
-    // $response = json_encode($myObj);
-
-    // echo $result;
     $outp = array();
     $outp = $result->fetch_all(MYSQLI_ASSOC);
     echo json_encode($outp);

@@ -19,25 +19,30 @@ require ("config.php");
         exit(0);
     }
 
+    
 
-    $response = 0;
-    $id = $_GET['id'];
-
-    $sql = "SELECT * FROM fitness WHERE id = ".$id;
-    $result = mysqli_query($conn,"set NAMES utf8");
-    $result = mysqli_query($conn,$sql);
-   
-    // $myObj->id = $result[0]['id'];
-    // $myObj->code = $result[0]['code_fitness'];
-    // $myObj->name = $result[0]['name_fitness'];   
-    // $myObj->address = $result[0]['address_fitness'];   
-    // $myObj->open = $result[0]['open_fitness'];   
-    // $myObj->admin = $result[0]['admin_fitness'];        
-    // $response = json_encode($myObj);
-
-    // echo $result;
     $outp = array();
-    $outp = $result->fetch_all(MYSQLI_ASSOC);
+    $data = json_decode($_GET["data"], false);  
+    $id = $data->id;
+    $status = $data->status;
+    
+    mysqli_query($conn,"set NAMES utf8");
+    $sql = "UPDATE booking  ".
+            "SET status = '".$status."' ".
+            "WHERE id = ".$id;
+
+    $result = mysqli_query($conn,$sql);
+    if($result){
+        $sql2 = "SELECT * FROM booking  ".
+            "WHERE id = ".$id;
+        $result2 = mysqli_query($conn,$sql2);
+        while($row2 = mysqli_fetch_array($result2)) {
+            array_push($outp,['result' =>  'SUCCESS','timeE' => $row2['time_end']]);
+        }
+    }else{
+        array_push($outp,['result' =>  'ERROR']);
+    }
+
     echo json_encode($outp);
     $conn->close();
 ?>
